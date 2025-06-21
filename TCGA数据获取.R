@@ -85,12 +85,12 @@ range(meta$overall_survival)
 
 #筛选临床信息
 table(colnames(meta))
-meta = meta[,c('barcode','patient','event','overall_survival','gender','age_at_index','ajcc_pathologic_t','ajcc_pathologic_m','ajcc_pathologic_n','ajcc_pathologic_stage')]
+meta <- meta[,c('barcode','patient','event','overall_survival','gender','age_at_index','ajcc_pathologic_t','ajcc_pathologic_m','ajcc_pathologic_n','ajcc_pathologic_stage')]
 meta <- as.data.frame(meta)
 meta$age_at_index <- as.numeric(meta$age_at_index)
 meta$overall_survival <- as.numeric(meta$overall_survival)
-meta = data.frame(meta)
-colnames(meta) = c('SampleID','PatientID','fustat','futime','gender','age','T','M','N','stage')
+meta <- data.frame(meta)
+colnames(meta) <- c('SampleID','PatientID','fustat','futime','gender','age','T','M','N','stage')
 
 #匹配表达数据及临床信息
 head(rownames(meta))
