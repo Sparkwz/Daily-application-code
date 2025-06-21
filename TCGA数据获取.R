@@ -83,6 +83,15 @@ range(meta$overall_survival)
 meta$overall_survival <- meta$overall_survival/30.4375
 range(meta$overall_survival)
 
+#筛选临床信息
+table(colnames(meta))
+meta= meta[,c('barcode','patient','event','overall_survival','gender','age_at_index','ajcc_pathologic_t','ajcc_pathologic_m','ajcc_pathologic_n','ajcc_pathologic_stage')]
+meta <- as.data.frame(meta)
+meta$age_at_index <- as.numeric(meta$age_at_index)
+meta$overall_survival <- as.numeric(meta$overall_survival)
+meta = data.frame(meta)
+colnames(meta) = c('SampleID','PatientID','fustat','futime','gender','age','T','M','N','stage')
+
 #匹配表达数据及临床信息
 head(rownames(meta))
 head(colnames(tpm))
@@ -95,6 +104,6 @@ identical(rownames(meta),colnames(tpm))
 
 #保存表达数据
 write.table(tpm, paste0("./", project,"/symbol_unlog.txt"), sep = "\t", row.names = TRUE, col.names = TRUE, quote = FALSE)
+
 #保存临床信息
-table(colnames(meta))
-write.csv(meta_df, paste0("./", project,"/clinical.csv"), row.names = T) #临床注释信息
+write.csv(meta, paste0("./", project,"/clinical.csv"), row.names = F)
