@@ -69,8 +69,10 @@ meta <- meta %>%
   mutate(event = vital_status)
 
 #去掉生存信息不全或者生存时间小于30天的样本
-k1 <- meta$overall_survival >= 30;table(k1) #筛选小于30days样本
-k2 <- !(is.na(meta$overall_survival)|is.na(meta$overall_survival));table(k2) #筛选生存信息不全样本
+k1 <- meta$overall_survival >= 30 #筛选大于30days样本
+table(k1) 
+k2 <- !(is.na(meta$overall_survival)|is.na(meta$overall_survival)) #筛选生存信息齐全样本
+table(k2) 
 meta <- meta[k1 & k2,]
 
 #规范结局事件为0/1
@@ -95,7 +97,8 @@ colnames(meta) <- c('SampleID','PatientID','fustat','futime','gender','age','T',
 #匹配表达数据及临床信息
 head(rownames(meta))
 head(colnames(tpm))
-s <- intersect(rownames(meta),colnames(tpm));length(s) #获取两者交集
+s <- intersect(rownames(meta),colnames(tpm))
+length(s) #获取两者交集
 tpm <- tpm[,s]
 meta <- meta[s,]
 dim(tpm)
