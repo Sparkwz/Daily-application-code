@@ -20,7 +20,7 @@ b=idmap1::getIDs("GPL6102")
 #b=idmap2::get_soft_IDs("GPL6102")
 head(b)
 #使用match函数找到对应的symbol
-symbol_annotations <- b$symbol[match(rownames(a), b$probe_id)]
+  symbol_annotations <- b$symbol[match(rownames(a), b$ID)]
 #将符号注释添加到a的行名中
 rownames(a) <- symbol_annotations
 #删去无法注释基因
