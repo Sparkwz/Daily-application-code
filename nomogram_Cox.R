@@ -15,7 +15,7 @@ str(training_dataset)
 
 ################ 2. 单因素Cox回归 ################
 #单因素分析(单个分别读取)
-vars_to_test <- c("Tumor_distance", "POST_NLR", "AMP")
+vars_to_test <- c("Tumor_distance", "POST_NLR", "AMP") #纳入变量名称
 univ_formulas <- sapply(vars_to_test, function(x) as.formula(paste0("Surv(OS, Censor) ~ ", x)))
 univ_models <- lapply(univ_formulas, function(x) coxph(x, data = training_dataset))
 univ_results <- lapply(univ_models, function(x) {
@@ -32,7 +32,6 @@ print(univ_results_df)
 
 ################ 3. 多因素Cox回归 ################
 # 选择纳入多因素的变量
-#AMP p.value 0.0771 先纳入？根据实际意义选择
 multiv_model <- coxph(Surv(OS, Censor) ~ Tumor_distance + POST_NLR + AMP, data = training_dataset)
 summary(multiv_model)
 
