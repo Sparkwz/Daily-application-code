@@ -6,7 +6,7 @@ library(timeROC)
 library(ggplot2)
 
 # 设置工作目录
-setwd("C:/Users/56426/Desktop/Doing/杂项/Jiayin")
+setwd("//")
 
 ################ 1. 读取训练集数据 ################
 #读取数据
