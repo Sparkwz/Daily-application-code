@@ -30,13 +30,13 @@ univ_results_df <- do.call(rbind, univ_results)
 rownames(univ_results_df) <- vars_to_test
 print(univ_results_df)
 
-################ 多因素Cox回归 ################
+################ 3. 多因素Cox回归 ################
 # 选择纳入多因素的变量
 #AMP p.value 0.0771 先纳入？根据实际意义选择
 multiv_model <- coxph(Surv(OS, Censor) ~ Tumor_distance + POST_NLR + AMP, data = training_dataset)
 summary(multiv_model)
 
-################ 构建列线图 ################
+################ 4. 构建列线图 ################
 # 设置数据分布
 dd <- datadist(training_dataset)
 options(datadist = "dd")
@@ -56,7 +56,7 @@ pdf("nomogram_training.pdf", width = 8, height = 6)
 plot(nom)
 dev.off()
 
-################绘制ROC曲线################
+################ 5. 绘制ROC曲线 ################
 #生成分析需要的输入格式，三列数据分别为生存时间、生存状态、Cox预测值
 time_roc <- timeROC(  
   T=training_dataset$OS,  
